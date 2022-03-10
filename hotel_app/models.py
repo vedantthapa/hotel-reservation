@@ -4,7 +4,7 @@ from datetime import date, datetime
 
 
 class Hotel(models.Model):
-    name = models.CharField(max_length=25, null=False)
+    name = models.CharField(max_length=25, null=False, primary_key=True)
     email = models.CharField(max_length=35)
     city = models.CharField(max_length=35)
 
@@ -12,18 +12,7 @@ class Hotel(models.Model):
         return self.name
 
 
-class Guest(models.Model):
-    name = models.CharField(max_length=50)
-    age = models.IntegerField(default=20)
-    email = models.CharField(max_length=35)
-
-    def __str__(self) -> str:
-        return self.name
-
-
 class Booking(models.Model):
-    guest = models.ForeignKey(
-        Guest, on_delete=models.CASCADE, related_name='guest')
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     check_in = models.DateField(default=datetime.now)
     check_out = models.DateField(default=datetime.now)
@@ -33,3 +22,14 @@ class Booking(models.Model):
 
     def hotel_name(self):
         return self.hotel
+
+
+class Guest(models.Model):
+    booking = models.ForeignKey(
+        Booking, on_delete=models.CASCADE, related_name='guest')
+    name = models.CharField(max_length=50)
+    age = models.IntegerField(default=20)
+    email = models.CharField(max_length=35)
+
+    def __str__(self) -> str:
+        return self.name
