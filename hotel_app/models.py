@@ -29,7 +29,7 @@ class Booking(models.Model):
     check_out = models.DateField(default=datetime.now)
 
     def __str__(self):
-        return f"{self.guest} has booked {self.room} from {self.check_in} to {self.check_out}"
+        return f"Booking confirmed!"
 
     def hotel_name(self):
         return self.hotel
