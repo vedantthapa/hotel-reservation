@@ -19,7 +19,7 @@ class BookingSerializer(ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = ["hotel", "check_in", "check_out", "guest"]
+        fields = ["hotel", "booking_id", "check_in", "check_out", "guest"]
 
     def create(self, validated_data):
         guest_data = validated_data.pop('guest')

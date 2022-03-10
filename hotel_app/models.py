@@ -1,6 +1,11 @@
 from django.db import models
 from django.conf import settings
 from datetime import date, datetime
+import uuid
+
+
+def generate_booking_id():
+    return str(uuid.uuid4()).split("-")[-1]
 
 
 class Hotel(models.Model):
@@ -16,12 +21,16 @@ class Booking(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     check_in = models.DateField(default=datetime.now)
     check_out = models.DateField(default=datetime.now)
+    booking_id = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return f"Booking confirmed!"
 
-    def hotel_name(self):
-        return self.hotel
+    def save(self, *args, **kwargs):
+        if len(self.booking_id.strip(" ")) == 0:
+            self.booking_id = generate_booking_id()
+
+        super(Booking, self).save(*args, **kwargs)
 
 
 class Guest(models.Model):
