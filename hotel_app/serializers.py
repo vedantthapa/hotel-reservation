@@ -1,4 +1,6 @@
-from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
+from curses import BUTTON1_DOUBLE_CLICKED
+from pickle import FALSE, TRUE
+from rest_framework.serializers import ModelSerializer, ValidationError
 from .models import Guest, Hotel, Booking
 
 
@@ -29,3 +31,10 @@ class BookingSerializer(ModelSerializer):
             each['booking'] = booking
         guest_set_serializer.create(guest_data)
         return booking
+
+    def validate(self, data):
+        if data['check_in'] > data['check_out']:
+            raise ValidationError(
+                {"check_out": "check-out must occur after check-in date"})
+
+        return data
