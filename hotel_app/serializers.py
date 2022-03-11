@@ -35,6 +35,20 @@ class BookingSerializer(ModelSerializer):
     def validate(self, data):
         if data['check_in'] > data['check_out']:
             raise ValidationError(
-                {"check_out": "check-out must occur after check-in date"})
+                {"check_out": "Check-out must occur after check-in date"})
+
+        if not data['guest']:
+            raise ValidationError({"guest": "Please enter atleast one guest"})
+
+        bookings = Booking.objects.filter(hotel=data['hotel'])
+        availability = []
+        for booking in bookings:
+            if booking.check_in > data['check_out'] or booking.check_out < data['check_in']:
+                availability.append(True)
+            else:
+                availability.append(False)
+        if not all(availability):
+            raise ValidationError(
+                f"{data['hotel']} is already booked for the specified dates! Please change the dates and try again.")
 
         return data
