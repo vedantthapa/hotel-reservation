@@ -18,5 +18,5 @@ class Booking_List(generics.ListCreateAPIView):
         if serializer.is_valid():
             serializer.save()
             booking_id = serializer.data.pop('booking_id')
-            return Response(f"Your confirmation number is: {booking_id}", status=status.HTTP_201_CREATED)
+            return Response({f"Booking confirmed with ID: {booking_id}"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
