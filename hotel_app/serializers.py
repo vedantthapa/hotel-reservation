@@ -1,5 +1,3 @@
-from curses import BUTTON1_DOUBLE_CLICKED
-from pickle import FALSE, TRUE
 from rest_framework.serializers import ModelSerializer, ValidationError
 from .models import Guest, Hotel, Booking
 

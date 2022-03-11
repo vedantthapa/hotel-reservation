@@ -1,6 +1,5 @@
 from django.db import models
-from django.conf import settings
-from datetime import date, datetime
+from datetime import datetime
 import uuid
 
 
