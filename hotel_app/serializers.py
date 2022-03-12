@@ -1,11 +1,19 @@
 from rest_framework.serializers import ModelSerializer, ValidationError
 from .models import Guest, Hotel, Booking
+from datetime import datetime
 
 
 class HotelSerializer(ModelSerializer):
     class Meta:
         model = Hotel
         fields = ("name", "email", "city")
+
+    def validate(self, data):
+        if not data['city'].isalpha():
+            raise ValidationError(
+                {"city": "City name can only contain alphabets"})
+
+        return data
 
 
 class GuestSerializer(ModelSerializer):
@@ -34,6 +42,10 @@ class BookingSerializer(ModelSerializer):
         if data['check_in'] > data['check_out']:
             raise ValidationError(
                 {"check_out": "Check-out must occur after check-in date"})
+
+        if data['check_in'] < datetime.now().date():
+            raise ValidationError(
+                {"check_in": "Check-in must occur on a future date"})
 
         if not data['guest']:
             raise ValidationError({"guest": "Please enter atleast one guest"})
