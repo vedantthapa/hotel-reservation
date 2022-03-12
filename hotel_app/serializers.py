@@ -41,10 +41,17 @@ class BookingSerializer(ModelSerializer):
         bookings = Booking.objects.filter(hotel=data['hotel'])
         availability = []
         for booking in bookings:
-            if booking.check_in > data['check_out'] or booking.check_out < data['check_in']:
-                availability.append(True)
+            if booking.check_in < data['check_in']:
+                if booking.check_out < data['check_in']:
+                    availability.append(True)
+                else:
+                    availability.append(False)
             else:
-                availability.append(False)
+                if data['check_out'] < booking.check_in:
+                    availability.append(True)
+                else:
+                    availability.append(False)
+
         if not all(availability):
             raise ValidationError(
                 f"{data['hotel']} is already booked for the specified dates! Please change the dates and try again.")
