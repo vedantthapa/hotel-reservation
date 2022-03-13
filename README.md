@@ -18,8 +18,8 @@ Solution to REST API project posted in the MCDA5550 class by Prof. Sanjeevi Rama
 The first thing to do is to clone the repository:
 
 ```sh
-$ git clone https://github.com/vedantthapa/django-hotelapi.git
-$ cd django-hotelapi
+$ git clone https://github.com/vedantthapa/hotel-reservation.git
+$ cd hotel-reservation
 ```
 
 Then install the dependencies:
