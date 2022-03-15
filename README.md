@@ -11,7 +11,6 @@ Solution to REST API project posted in the MCDA5550 class by Prof. Sanjeevi Rama
    - Check-in date must be greater than the current date.
 4. Character field validations are added.
    - City field in the Hotel model must only contain alphabets.
-   - Name field in the Guest model must only contain alphabets.
 
 ## Setup
 
