@@ -37,7 +37,7 @@ class Guest(models.Model):
         Booking, on_delete=models.CASCADE, related_name='guest')
     name = models.CharField(max_length=50)
     age = models.IntegerField(default=20)
-    email = models.CharField(max_length=35)
+    gender = models.CharField(max_length=6)
 
     def __str__(self) -> str:
         return self.name

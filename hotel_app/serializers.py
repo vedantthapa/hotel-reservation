@@ -19,7 +19,7 @@ class HotelSerializer(ModelSerializer):
 class GuestSerializer(ModelSerializer):
     class Meta:
         model = Guest
-        fields = ("name", "age", "email")
+        fields = ("name", "age", "gender")
 
 
 class BookingSerializer(ModelSerializer):
