@@ -11,7 +11,7 @@ class Hotel_list(generics.ListCreateAPIView):
     serializer_class = HotelSerializer
 
     def get_queryset(self):
-        data = self.request.data
+        data = self.request.GET.dict()
         if ("check_in" in data) and ("check_out" in data):
             bookings = Booking.objects.all()
             check_in = datetime.strptime(data['check_in'], "%Y-%m-%d").date()
