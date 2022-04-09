@@ -11,6 +11,7 @@ class Hotel(models.Model):
     name = models.CharField(max_length=25, null=False, primary_key=True)
     email = models.CharField(max_length=35)
     city = models.CharField(max_length=35)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
 
     def __str__(self):
         return self.name

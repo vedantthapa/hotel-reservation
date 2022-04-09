@@ -6,7 +6,7 @@ from datetime import datetime
 class HotelSerializer(ModelSerializer):
     class Meta:
         model = Hotel
-        fields = ("name", "email", "city")
+        fields = ("name", "email", "city", "price")
 
     def validate(self, data):
         if not data['city'].isalpha():
